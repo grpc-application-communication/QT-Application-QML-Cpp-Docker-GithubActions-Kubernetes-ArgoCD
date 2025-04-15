@@ -1,0 +1,57 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>HomePage.qml</file>
+        <file>assets/logo.svg</file>
+        <file>assets/ic_sensors.svg</file>
+        <file>assets/ic_settings.svg</file>
+        <file>assets/Climate.svg</file>
+        <file>assets/weather.svg</file>
+        <file>assets/ic_flashlight.svg</file>
+        <file>assets/ic_status.svg</file>
+      
+      
+        <file>SensorsPage.qml</file>
+        <file>assets/car_logo.svg</file>
+        <file>assets/ic_speed.svg</file>
+        <file>assets/ic_battery.svg</file>
+        <file>assets/fuel.svg</file>
+        <file>assets/ic_oil.svg</file>
+        <file>assets/tire.svg</file>
+        <file>assets/temperature.svg</file>
+        <file>assets/chevron-right.svg</file>
+        
+        <file>SpeedPage.qml</file>
+        <file>assets/needle.svg</file>
+        
+        <file>BatteryPage.qml</file>
+        
+        <file>FuelPage.qml</file>
+        
+        <file>OilPage.qml</file>
+        
+        <file>TirePage.qml</file>
+        
+        <file>WaterPage.qml</file>
+
+        <file>ClimatePage.qml</file>
+        
+        <file>WeatherPage.qml</file>
+        <file>assets/weather_sunny.svg</file>
+        <file>assets/precipitation_icon.svg</file>
+        <file>assets/wind_icon.svg</file>
+        <file>assets/humidity_icon.svg</file>
+        
+        <file>LightPage.qml</file>
+        <file>assets/ic_flashoff.svg</file>
+        <file>assets/ic_flashon.svg</file>
+        
+        <file>StatusPage.qml</file>
+        <file>assets/ic_lock_green.svg</file>
+        <file>assets/ic_lock_red.svg</file>
+        <file>assets/car_outline.svg</file>
+        
+        <file>SettingsPage.qml</file>
+    </qresource>
+</RCC>
+
