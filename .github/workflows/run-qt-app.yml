@@ -19,5 +19,5 @@ jobs:
           DISPLAY: ":0"
         run: |
           echo "=== Lancement de l'application Qt ==="
-          nohup /home/farah/build-QT_APP_QML-Desktop-Debug/MyCarApp > /tmp/qt_app.log 2>&1 &
+          nohup /home/farah/build-QT_APP_QML-Desktop-Debug/MyCarApp > /home/farah/qt_app.log 2>&1 &
           echo "=== Application Qt lancée ==="
