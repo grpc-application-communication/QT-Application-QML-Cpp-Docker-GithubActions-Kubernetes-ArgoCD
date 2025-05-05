@@ -8,7 +8,7 @@ on:
 jobs:
   run_qt_app:
     name: Run Qt App on Local Runner
-    runs-on: self-hosted  # Important : runner local, pas GitHub-hosted
+    runs-on: self-hosted
     steps:
       - name: Autoriser l'accès à X11
         run: |
@@ -19,8 +19,5 @@ jobs:
           DISPLAY: ":0"
         run: |
           echo "=== Lancement de l'application Qt ==="
-          LOG_PATH="$HOME/qt_app.log"
-          touch $LOG_PATH
-          chmod 644 $LOG_PATH
-          nohup /home/farah/build-QT_APP_QML-Desktop-Debug/MyCarApp > $LOG_PATH 2>&1 &
+          nohup /home/farah/build-QT_APP_QML-Desktop-Debug/MyCarApp > &
           echo "=== Application Qt lancée. Logs dans $LOG_PATH ==="
