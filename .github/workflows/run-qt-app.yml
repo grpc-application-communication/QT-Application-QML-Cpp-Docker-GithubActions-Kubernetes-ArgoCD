@@ -4,7 +4,6 @@ on:
   push:
     branches: [ main ]
 
-
 jobs:
   run_qt_app:
     name: Run Qt App on Local Runner
@@ -19,5 +18,6 @@ jobs:
           DISPLAY: ":0"
         run: |
           echo "=== Lancement de l'application Qt ==="
-          nohup /home/farah/build-QT_APP_QML-Desktop-Debug/MyCarApp > &
+          LOG_PATH="$HOME/qt_app.log"
+          nohup /home/farah/build-QT_APP_QML-Desktop-Debug/MyCarApp > "$LOG_PATH" 2>&1 &
           echo "=== Application Qt lancée. Logs dans $LOG_PATH ==="
