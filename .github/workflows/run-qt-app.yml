@@ -19,5 +19,8 @@ jobs:
           DISPLAY: ":0"
         run: |
           echo "=== Lancement de l'application Qt ==="
-          nohup /home/farah/build-QT_APP_QML-Desktop-Debug/MyCarApp > /home/farah/qt_app.log 2>&1 &
-          echo "=== Application Qt lancée ==="
+          LOG_PATH="$HOME/qt_app.log"
+          touch $LOG_PATH
+          chmod 644 $LOG_PATH
+          nohup /home/farah/build-QT_APP_QML-Desktop-Debug/MyCarApp > $LOG_PATH 2>&1 &
+          echo "=== Application Qt lancée. Logs dans $LOG_PATH ==="
