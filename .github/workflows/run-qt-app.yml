@@ -9,16 +9,9 @@ jobs:
     name: Run Qt App on Local Runner
     runs-on: self-hosted
     steps:
-      - name: Autoriser l'accès à X11
-        run: |
-          xhost +SI:localuser:$(whoami)
 
-      - name: Lancer l'application Qt via X11
-        env:
-          DISPLAY: ":0"
-          QT_QPA_PLATFORM: xcb
+      - name: Lancer l'application Qt
         run: |
           echo "=== Lancement de l'application Qt ==="
-          LOG_PATH="$HOME/qt_app.log"
-          nohup /home/farah/build-QT_APP_QML-Desktop-Debug/MyCarApp > "$LOG_PATH" 2>&1 &
-          echo "=== Application Qt lancée. Logs dans $LOG_PATH ==="
+          cd /home/farah/build-QT_APP_QML-Desktop-Debug
+          ./MyCarApp
