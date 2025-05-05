@@ -1,0 +1,22 @@
+name: Run Qt Application
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  run_qt_app:
+    name: Run Qt App on Local Runner
+    runs-on: self-hosted  # Important : runner local, pas GitHub-hosted
+    steps:
+      - name: Autoriser l'accès à X11
+        run: |
+          xhost +SI:localuser:$(whoami)
+
+      - name: Lancer l'application Qt
+        env:
+          DISPLAY: ":0"
+        run: |
+          echo "=== Lancement de l'application Qt ==="
+          nohup /home/farah/build-QT_APP_QML-Desktop-Debug/MyCarApp > /tmp/qt_app.log 2>&1 &
+          echo "=== Application Qt lancée ==="
