@@ -3,15 +3,19 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import QtGraphicalEffects 1.15
 import QtQuick.Shapes 1.15
+import QtQuick.LocalStorage 2.0
 
 Item {
     id: oilpage
     width: 300
     height: 300
 
-    property real oil: 30
+    // Bind oil directly to the C++ backend's property
+    property real oil: vehicleDataMonitor.oilLevel
     property real maxOil: 150
+
     signal backRequested()
+
 
     Rectangle {
         anchors.fill: parent
@@ -95,72 +99,32 @@ Item {
                         }
                     }
 
-                    Item {
-                        width: parent.width
-                        height: parent.height / 2
-                        anchors.bottom: parent.bottom
-                        anchors.right: parent.right
-                        anchors.bottomMargin: 180
-
-                        Repeater {
-                            model: 60
-                            Rectangle {
-                                width: 2
-                                height: index % 5 === 0 ? 16 : 8
-                                color: index < (oil / maxOil) * 60 ? "#90ee90" : "#444"
-                                radius: 1
-                                anchors.centerIn: parent
-                                transform: Rotation {
-                                    origin.x: 1
-                                    origin.y: needle.height + 10
-                                    angle: 135 + (index * 4.5) + 90
-                                }
-                            }
-                        }
-                    }
-
-                    Image {
-                        id: needle
-                        source: "qrc:/assets/needle.svg"
-                        width: 20
-                        height: 100
-                        fillMode: Image.PreserveAspectFit
-                        anchors.bottom: parent.bottom
-                        anchors.left: parent.left
-                        anchors.bottomMargin: 157
-                        anchors.leftMargin: 70
-
-                        transform: Rotation {
-                            origin.x: needle.width / 2
-                            origin.y: needle.height
-                            angle: 45 + (oil / maxOil) * 270
-                        }
-                    }
 
                     Column {
                         anchors.centerIn: parent
 
                         Text {
                             text: Math.round(oil)
-                            font.pixelSize: 14
+                            font.pixelSize: 20
                             font.bold: true
                             color: "#999"
                             anchors.bottom: parent.bottom
                             anchors.left: parent.left
-                            anchors.bottomMargin: -40
-                            anchors.leftMargin: -20
+                            anchors.bottomMargin: -15
+                            anchors.leftMargin: -25
                         }
 
                         Text {
                             text: "PSI"
-                            font.pixelSize: 14
+                            font.pixelSize: 20
                             color: "#999"
                             anchors.bottom: parent.bottom
                             anchors.left: parent.left
-                            anchors.bottomMargin: -40
-                            anchors.leftMargin: 2
+                            anchors.bottomMargin: -15
+                            anchors.leftMargin: 0
                         }
                     }
+
 
                     Image {
                         source: "qrc:/assets/ic_oil.svg"

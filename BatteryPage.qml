@@ -3,15 +3,19 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import QtGraphicalEffects 1.15
 import QtQuick.Shapes 1.15
+import QtQuick.LocalStorage 2.0
 
 Item {
     id: batterypage
     width: 300
     height: 300
 
-    property real batterylevel: 17
+    // Bind battery directly to the C++ backend's property
+    property real batterylevel: vehicleDataMonitor.batteryLevel
     property real maxBatterylevel: 19
+
     signal backRequested()
+
 
     Rectangle {
         anchors.fill: parent
@@ -95,70 +99,29 @@ Item {
                         }
                     }
 
-                    Item {
-                        width: parent.width
-                        height: parent.height / 2
-                        anchors.bottom: parent.bottom
-                        anchors.right: parent.right
-                        anchors.bottomMargin: 180
-
-                        Repeater {
-                            model: 60
-                            Rectangle {
-                                width: 2
-                                height: index % 5 === 0 ? 16 : 8
-                                color: index < (batterylevel / maxBatterylevel) * 60 ? "#90ee90" : "#444"
-                                radius: 1
-                                anchors.centerIn: parent
-                                transform: Rotation {
-                                    origin.x: 1
-                                    origin.y: needle.height + 10
-                                    angle: 135 + (index * 4.5) + 90
-                                }
-                            }
-                        }
-                    }
-
-                    Image {
-                        id: needle
-                        source: "qrc:/assets/needle.svg"
-                        width: 20
-                        height: 100
-                        fillMode: Image.PreserveAspectFit
-                        anchors.bottom: parent.bottom
-                        anchors.left: parent.left
-                        anchors.bottomMargin: 130
-                        anchors.leftMargin: 210
-
-                        transform: Rotation {
-                            origin.x: needle.width / 2
-                            origin.y: needle.height
-                            angle: 45 + (batterylevel / maxBatterylevel) * 270
-                        }
-                    }
 
                     Column {
                         anchors.centerIn: parent
 
                         Text {
                             text: Math.round(batterylevel)
-                            font.pixelSize: 14
+                            font.pixelSize: 20
                             font.bold: true
                             color: "#999"
                             anchors.bottom: parent.bottom
                             anchors.left: parent.left
-                            anchors.bottomMargin: -40
-                            anchors.leftMargin: -25
+                            anchors.bottomMargin: -15
+                            anchors.leftMargin: -35
                         }
 
                         Text {
                             text: "VOLT"
-                            font.pixelSize: 14
+                            font.pixelSize: 20
                             color: "#999"
                             anchors.bottom: parent.bottom
                             anchors.left: parent.left
-                            anchors.bottomMargin: -40
-                            anchors.leftMargin: -2
+                            anchors.bottomMargin: -15
+                            anchors.leftMargin: -5
                         }
                     }
 

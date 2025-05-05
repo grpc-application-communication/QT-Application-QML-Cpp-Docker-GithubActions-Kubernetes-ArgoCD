@@ -9,9 +9,13 @@ Item {
     width: 300
     height: 300
 
-    property real tire: 9
+
+    // Bind tire directly to the C++ backend's property
+    property real tire: vehicleDataMonitor.tireLevel
     property real maxTire: 10
+
     signal backRequested()
+
 
     Rectangle {
         anchors.fill: parent
@@ -93,70 +97,28 @@ Item {
                         }
                     }
 
-                    Item {
-                        width: parent.width
-                        height: parent.height / 2
-                        anchors.bottom: parent.bottom
-                        anchors.right: parent.right
-                        anchors.bottomMargin: 180
-
-                        Repeater {
-                            model: 60
-                            Rectangle {
-                                width: 2
-                                height: index % 5 === 0 ? 16 : 8
-                                color: index < (tire / maxTire) * 60 ? "#90ee90" : "#444"
-                                radius: 1
-                                anchors.centerIn: parent
-                                transform: Rotation {
-                                    origin.x: 1
-                                    origin.y: needle.height + 10
-                                    angle: 135 + (index * 4.5) + 90
-                                }
-                            }
-                        }
-                    }
-
-                    Image {
-                        id: needle
-                        source: "qrc:/assets/needle.svg"
-                        width: 20
-                        height: 100
-                        fillMode: Image.PreserveAspectFit
-                        anchors.bottom: parent.bottom
-                        anchors.left: parent.left
-                        anchors.bottomMargin: 130
-                        anchors.leftMargin: 210
-
-                        transform: Rotation {
-                            origin.x: needle.width / 2
-                            origin.y: needle.height
-                            angle: 45 + (tire / maxTire) * 270
-                        }
-                    }
-
                     Column {
                         anchors.centerIn: parent
 
                         Text {
                             text: Math.round(tire)
-                            font.pixelSize: 14
+                            font.pixelSize: 20
                             font.bold: true
                             color: "#999"
                             anchors.bottom: parent.bottom
                             anchors.left: parent.left
-                            anchors.bottomMargin: -40
-                            anchors.leftMargin: -15
+                            anchors.bottomMargin: -15
+                            anchors.leftMargin: -25
                         }
 
                         Text {
                             text: "bar"
-                            font.pixelSize: 14
+                            font.pixelSize: 20
                             color: "#999"
                             anchors.bottom: parent.bottom
                             anchors.left: parent.left
-                            anchors.bottomMargin: -40
-                            anchors.leftMargin: -5
+                            anchors.bottomMargin: -15
+                            anchors.leftMargin: 0
                         }
                     }
 

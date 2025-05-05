@@ -3,14 +3,17 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import QtGraphicalEffects 1.15
 import QtQuick.Shapes 1.15
+import QtQuick.LocalStorage 2.0
 
 Item {
     id: fuelpage
     width: 300
     height: 300
 
-    property real fuel: 30
-    property real maxFuel: 100
+    // Bind fuel directly to the C++ backend's property
+    property real fuel: vehicleDataMonitor.fuelLevel
+    property real maxFuel: 300
+
     signal backRequested()
 
     Rectangle {
@@ -59,14 +62,12 @@ Item {
                             gradient.addColorStop(0.5, "#60f994");
                             gradient.addColorStop(1, "#ffee00");
 
-                            // Arc arrière-plan
                             ctx.beginPath();
                             ctx.lineWidth = 18;
                             ctx.strokeStyle = "#1e1e1e";
                             ctx.arc(centerX, centerY, radius, startAngle, startAngle + 2 * Math.PI - (startAngle - endAngle));
                             ctx.stroke();
 
-                            // Arc actif
                             ctx.beginPath();
                             ctx.lineWidth = 18;
                             ctx.strokeStyle = gradient;
@@ -76,7 +77,7 @@ Item {
 
                         Connections {
                             target: fuelpage
-                            onFuellevelChanged: arcCanvas.requestPaint()
+                            onFuelChanged: arcCanvas.requestPaint()
                         }
                     }
 
@@ -95,70 +96,28 @@ Item {
                         }
                     }
 
-                    Item {
-                        width: parent.width
-                        height: parent.height / 2
-                        anchors.bottom: parent.bottom
-                        anchors.right: parent.right
-                        anchors.bottomMargin: 180
-
-                        Repeater {
-                            model: 60
-                            Rectangle {
-                                width: 2
-                                height: index % 5 === 0 ? 16 : 8
-                                color: index < (fuel/ maxFuel) * 60 ? "#90ee90" : "#444"
-                                radius: 1
-                                anchors.centerIn: parent
-                                transform: Rotation {
-                                    origin.x: 1
-                                    origin.y: needle.height + 10
-                                    angle: 135 + (index * 4.5) + 90
-                                }
-                            }
-                        }
-                    }
-
-                    Image {
-                        id: needle
-                        source: "qrc:/assets/needle.svg"
-                        width: 20
-                        height: 100
-                        fillMode: Image.PreserveAspectFit
-                        anchors.bottom: parent.bottom
-                        anchors.left: parent.left
-                        anchors.bottomMargin: 190
-                        anchors.leftMargin: 85
-
-                        transform: Rotation {
-                            origin.x: needle.width / 2
-                            origin.y: needle.height
-                            angle: 45 + (fuel / maxFuel) * 270
-                        }
-                    }
-
                     Column {
                         anchors.centerIn: parent
 
                         Text {
                             text: Math.round(fuel)
-                            font.pixelSize: 14
+                            font.pixelSize: 20
                             font.bold: true
                             color: "#999"
                             anchors.bottom: parent.bottom
                             anchors.left: parent.left
-                            anchors.bottomMargin: -40
-                            anchors.leftMargin: -10
+                            anchors.bottomMargin: -15
+                            anchors.leftMargin: -15
                         }
 
                         Text {
                             text: "L"
-                            font.pixelSize: 14
+                            font.pixelSize: 20
                             color: "#999"
                             anchors.bottom: parent.bottom
                             anchors.left: parent.left
-                            anchors.bottomMargin: -40
-                            anchors.leftMargin: 8
+                            anchors.bottomMargin: -15
+                            anchors.leftMargin: 10
                         }
                     }
 
@@ -173,7 +132,6 @@ Item {
                     }
                 }
 
-                // Back Button
                 Button {
                     text: "Back"
                     anchors.horizontalCenter: parent.horizontalCenter

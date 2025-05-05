@@ -4,9 +4,11 @@ import QtQuick.Extras 1.4
 import QtQuick.Layouts 1.15
 import QtGraphicalEffects 1.0
 
+
 Item {
     id: speedpage
     signal backRequested()
+    property int speedValue: vehicleDataMonitor.speed
 
     Column {
         anchors.fill: parent
@@ -49,8 +51,12 @@ Item {
             CircularGauge {
                 id: gauge
                 anchors.fill: parent
-                value: 80
+                value: speedValue
+                minimumValue: 0
+                maximumValue: 230
             }
+
+
             Text {
                 text: "km/h"
                 color: "white"

@@ -9,7 +9,7 @@
         <file>assets/weather.svg</file>
         <file>assets/ic_flashlight.svg</file>
         <file>assets/ic_status.svg</file>
-      
+        <file>assets/gRPC_application_communication_architecture.png</file>
       
         <file>SensorsPage.qml</file>
         <file>assets/car_logo.svg</file>
@@ -23,6 +23,7 @@
         
         <file>SpeedPage.qml</file>
         <file>assets/needle.svg</file>
+        <file>assets/values.json</file>
         
         <file>BatteryPage.qml</file>
         
