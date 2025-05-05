@@ -4,6 +4,7 @@ on:
   push:
     branches: [ main ]
 
+
 jobs:
   run_qt_app:
     name: Run Qt App on Local Runner
