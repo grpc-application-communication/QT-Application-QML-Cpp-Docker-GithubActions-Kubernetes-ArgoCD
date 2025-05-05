@@ -13,9 +13,10 @@ jobs:
         run: |
           xhost +SI:localuser:$(whoami)
 
-      - name: Lancer l'application Qt
+      - name: Lancer l'application Qt via X11
         env:
           DISPLAY: ":0"
+          QT_QPA_PLATFORM: xcb
         run: |
           echo "=== Lancement de l'application Qt ==="
           LOG_PATH="$HOME/qt_app.log"
